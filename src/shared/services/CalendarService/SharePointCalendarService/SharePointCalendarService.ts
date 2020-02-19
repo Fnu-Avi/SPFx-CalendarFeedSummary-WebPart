@@ -46,10 +46,12 @@ export class SharePointCalendarService extends BaseCalendarService
     let dateFilter: string = "EventDate ge datetime'" + this.EventRange.Start.toISOString() + "' and EndDate lt datetime'" + this.EventRange.End.toISOString() + "'";
     try {
       const items = await web.getList(listUrl)
-        .items.select("Id,Title,Description,EventDate,EndDate,fAllDayEvent,Category,Location")
+        .items
+        // .select("Id,Title,Description,EventDate,EndDate,fAllDayEvent,Category,Location")
         .orderBy('EventDate', true)
         .filter(dateFilter)
         .get();
+      console.log(web.getList(listUrl).items.get())
       // Once we get the list, convert to calendar events
       let events: ICalendarEvent[] = items.map((item: any) => {
         let eventUrl: string = combine(webUrl, "DispForm.aspx?ID=" + item.Id);
@@ -61,7 +63,9 @@ export class SharePointCalendarService extends BaseCalendarService
           allDay: item.fAllDayEvent,
           category: item.Category,
           description: item.Description,
-          location: item.Location
+          location: item.Location,
+          approvalStatus: item.ows_ApprovalStatus,
+          id: item.Id
         };
         return eventItem;
       });

@@ -32,11 +32,11 @@ export default class CalendarFeedSummary extends React.Component<ICalendarFeedSu
   }
 
   public redirectAddEventsLink(): void {
-    window.location.replace('https://keckmedicine.sharepoint.com/sites/KSOM-Intranet');
+    window.location.replace('https://keckmedicine.sharepoint.com/sites/KSOM-Intranet/SitePages/AddEvent.aspx');
   }
 
   public redirectSeeAllLink(): void {
-    window.location.replace('https://keckmedicine.sharepoint.com/sites/KSOM-Intranet');
+    window.location.replace('https://keckmedicine.sharepoint.com/sites/KSOM-Intranet/_layouts/15/Events.aspx?ListGuid=d6091b90-cb76-4117-9a31-885ba71fb2e4');
   }
 
   /**
@@ -123,7 +123,7 @@ export default class CalendarFeedSummary extends React.Component<ICalendarFeedSu
         <div>
           <ActionButton
                 className={ styles.addEventsStyle }
-                iconProps={{ className: styles.iconStyle, iconName: "Add" }}
+                // iconProps={{ className: styles.iconStyle ,iconName: "Add" }}
                 onClick={this.redirectAddEventsLink}
             >
                 Add Event

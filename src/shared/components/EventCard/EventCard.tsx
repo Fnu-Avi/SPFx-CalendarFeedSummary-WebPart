@@ -8,10 +8,18 @@ import { IEventCardProps, IEventCardState } from ".";
 import { DateBox, DateBoxSize } from "../DateBox";
 import styles from "./EventCard.module.scss";
 import { Text } from "@microsoft/sp-core-library";
+import { DialogBasicExample } from "../modal/modal";
+import { sp } from "@pnp/sp";
 /**
  * Shows an event in a document card
  */
+
 export class EventCard extends React.Component<IEventCardProps, IEventCardState> {
+    constructor(props) {
+        super(props);
+        // this.state = {}
+    }
+
     public render(): React.ReactElement<IEventCardProps> {
         const { isNarrow } = this.props;
 
@@ -29,54 +37,71 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
             title,
             url,
             category,
+            approvalStatus,
+            id,
             // description,
             location } = this.props.event;
         const eventDate: moment.Moment = moment(start);
         const dateString: string = allDay ? eventDate.format(strings.AllDayDateFormat) : eventDate.format(strings.LocalizedTimeFormat);
         const { isEditMode } = this.props;
-        return (
-            <div>
-                <div
-                    className={css(styles.cardWrapper)}
-                    data-is-focusable={true}
-                    data-is-focus-item={true}
-                    role="listitem"
-                    aria-label={Text.format(strings.EventCardWrapperArialLabel, title, `${dateString}`)}
-                    tabIndex={0}
-                >
-                    <DocumentCard
-                        className={css(styles.root, !isEditMode && styles.rootIsActionable, styles.normalCard)}
-                        type={DocumentCardType.normal}
-                        onClickHref={isEditMode ? null : url}
+        console.log(approvalStatus);
+        if(approvalStatus == "Approved"){
+            return (
+                <div>
+                    <div
+                        className={css(styles.cardWrapper)}
+                        data-is-focusable={true}
+                        data-is-focus-item={true}
+                        role="listitem"
+                        aria-label={Text.format(strings.EventCardWrapperArialLabel, title, `${dateString}`)}
+                        tabIndex={0}
                     >
-                        <FocusZone>
-                            <div className={styles.dateBoxContainer} style={{ height: 160 }} data-automation-id="normal-card-preview">
-                                <DateBox
-                                    className={styles.dateBox}
-                                    startDate={start}
-                                    endDate={end}
-                                    size={DateBoxSize.Medium}
-                                />
-                            </div>
-                            <div className={styles.detailsContainer}>
-                                <div className={styles.category}>{category}</div>
-                                <div className={styles.title} data-automation-id="event-card-title">{title}</div>
-                                <div className={styles.datetime}>{dateString}</div>
-                                <div className={styles.location}>{location}</div>
-                                <ActionButton
-                                    className={styles.addToMyCalendar}
-                                    iconProps={{ iconName: "AddEvent" }}
-                                    ariaLabel={strings.AddToCalendarAriaLabel}
-                                    onClick={this._onAddToMyCalendar}
-                                >
-                                    {strings.AddToCalendarButtonLabel}
-                                </ActionButton>
-                            </div>
-                        </FocusZone>
-                    </DocumentCard>
+                        <DocumentCard
+                            className={css(styles.root, !isEditMode && styles.rootIsActionable, styles.normalCard)}
+                            type={DocumentCardType.normal}
+                            onClickHref={isEditMode ? null : url}
+                        >
+                            <FocusZone>
+                                <div className={styles.dateBoxContainer} style={{ height: 160 }} data-automation-id="normal-card-preview">
+                                    <DateBox
+                                        className={styles.dateBox}
+                                        startDate={start}
+                                        endDate={end}
+                                        size={DateBoxSize.Medium}
+                                    />
+                                    <DialogBasicExample {...this.props}> </DialogBasicExample>
+                                </div>
+                                <div className={styles.detailsContainer}>
+                                    <div className={styles.category}>{category}</div>
+                                    <div className={styles.title} data-automation-id="event-card-title">{title}</div>
+                                    <div className={styles.datetime}>{dateString}</div>
+                                    <div className={styles.location}>{location}</div>
+                                    <div className={styles.location}>{approvalStatus}</div>
+                                    {/* <div className={styles.category} id="myBtn">HJ</div> */}
+                                    
+                                    <ActionButton
+                                        className={styles.addToMyCalendar}
+                                        iconProps={{ iconName: "AddEvent" }}
+                                        ariaLabel={strings.AddToCalendarAriaLabel}
+                                        onClick={this._onAddToMyCalendar}
+                                    >
+                                        {strings.AddToCalendarButtonLabel}
+                                    </ActionButton>
+                                </div>
+                                </FocusZone>
+                        </DocumentCard>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        else{
+            return (
+                <span>
+                   
+                </span>
+            );
+        }
+        
     }
 
     private _renderNarrowCell(): JSX.Element {
@@ -166,10 +191,11 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
 
         // add the event to the calendar
         cal.addComponent(icsEvent);
-
+        console.log("data:text/calendar;charset=utf8," + encodeURIComponent(cal.toString()));
         // export the calendar
         // my spidey senses are telling me that there are sitaations where this isn't going to work, but none of my tests could prove it.
         // i suspect we're not encoding events properly
-        window.open("data:text/calendar;charset=utf8," + encodeURIComponent(cal.toString()));
+        // window.open("data:text/calendar;charset=utf8," + encodeURIComponent(cal.toString()));
+        window.location.href = "data:text/calendar;charset=utf8," + encodeURIComponent(cal.toString());
     }
 }

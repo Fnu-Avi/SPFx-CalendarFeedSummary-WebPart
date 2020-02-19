@@ -17,7 +17,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: "Meeting",
     location: "Barrie, ON",
-    description: "This is a description"
+    description: "This is a description",
+    approvalStatus: "Approved",
+    id: undefined
   },
   {
     title: "This event will be in one week",
@@ -27,7 +29,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: false,
     category: "Meeting",
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will last two days",
@@ -37,7 +41,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: "Meeting",
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will be in two weeks",
@@ -47,7 +53,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: "Meeting",
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will be in one month",
@@ -57,7 +65,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: "Meeting",
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will be in two months",
@@ -67,7 +77,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: "Meeting",
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will be in 1 quarter",
@@ -77,7 +89,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: undefined,
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will be in 4 months",
@@ -87,7 +101,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: undefined,
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will be in 5 months",
@@ -97,7 +113,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: undefined,
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will be in 6 months",
@@ -107,7 +125,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: undefined,
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Pending",
+    id: undefined
   },
   {
     title: "This event will be in 9 months",
@@ -117,7 +137,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: undefined,
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Approved",
+    id: undefined
   },
   {
     title: "This event will be in 1 year",
@@ -127,7 +149,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: "Partayyyy!",
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Approved",
+    id: undefined
   },
   {
     title: "This event will be in 18 months",
@@ -137,7 +161,9 @@ const sampleEvents: ICalendarEvent[] = [
     allDay: true,
     category: "Meeting",
     location: undefined,
-    description: undefined
+    description: undefined,
+    approvalStatus: "Approved",
+    id: undefined
   }
 ];
 

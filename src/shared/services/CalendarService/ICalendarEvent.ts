@@ -7,4 +7,6 @@ export interface ICalendarEvent {
     category: string|undefined;
     description: string|undefined;
     location: string|undefined;
+    approvalStatus: string|undefined;
+    id: number|undefined;
 }
