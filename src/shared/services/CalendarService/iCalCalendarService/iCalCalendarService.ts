@@ -36,7 +36,8 @@ export class iCalCalendarService extends BaseCalendarService implements ICalenda
           category: event.category,
           description: event.description,
           location: event.location,
-          approvalStatus: event.approvalStatus,
+          approvalStatus: event.EventStatus,
+          eventCampus: event.EventCampus,
           id: event.ID
         };
 

@@ -30,6 +30,7 @@ export class WordPressFullCalendarService extends BaseCalendarService implements
             category: undefined,
             location: undefined, // none found in WordPress
             approvalStatus: undefined,
+            eventCampus: undefined,
             id: undefined
           };
           return eventItem;

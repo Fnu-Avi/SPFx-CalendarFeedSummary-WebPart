@@ -35,6 +35,7 @@ export class RSSCalendarService extends BaseCalendarService implements ICalendar
           location: undefined, // no equivalent in RSS
           category: item.categories && item.categories.length > 0 && item.categories[0],
           approvalStatus: undefined,
+          eventCampus: undefined,
           id: undefined
         };
         return eventItem;

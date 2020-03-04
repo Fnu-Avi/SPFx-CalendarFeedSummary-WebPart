@@ -38,13 +38,14 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
             url,
             category,
             approvalStatus,
+            eventCampus,
             id,
             // description,
             location } = this.props.event;
         const eventDate: moment.Moment = moment(start);
         const dateString: string = allDay ? eventDate.format(strings.AllDayDateFormat) : eventDate.format(strings.LocalizedTimeFormat);
         const { isEditMode } = this.props;
-        console.log(approvalStatus);
+        // console.log(approvalStatus);
         if(approvalStatus == "Approved"){
             return (
                 <div>
@@ -63,6 +64,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
                         >
                             <FocusZone>
                                 <div className={styles.dateBoxContainer} style={{ height: 160 }} data-automation-id="normal-card-preview">
+                                    <span className={styles.location}>{eventCampus}</span>
                                     <DateBox
                                         className={styles.dateBox}
                                         startDate={start}
@@ -76,7 +78,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
                                     <div className={styles.title} data-automation-id="event-card-title">{title}</div>
                                     <div className={styles.datetime}>{dateString}</div>
                                     <div className={styles.location}>{location}</div>
-                                    <div className={styles.location}>{approvalStatus}</div>
+                                    {/* <div className={styles.location}>{approvalStatus}</div> */}
                                     {/* <div className={styles.category} id="myBtn">HJ</div> */}
                                     
                                     <ActionButton
@@ -96,9 +98,9 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
         }
         else{
             return (
-                <span>
-                   
-                </span>
+                <div>
+
+                </div>
             );
         }
         
@@ -127,7 +129,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
                     <DocumentCard
                         className={css(styles.root, styles.rootIsActionable, styles.rootIsCompact)}
                         type={DocumentCardType.compact}
-                        onClickHref={url}
+                        onClickHref={"#"}
                     >
                         <div data-automation-id="normal-card-preview">
                             <DateBox
@@ -147,7 +149,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
         );
     }
 
-    private _onAddToMyCalendar = (): void => {
+    private _onAddToMyCalendar = (e): void => {
         const { event } = this.props;
 
         // create a calendar to hold the event
@@ -191,11 +193,13 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
 
         // add the event to the calendar
         cal.addComponent(icsEvent);
-        console.log("data:text/calendar;charset=utf8," + encodeURIComponent(cal.toString()));
+        // console.log("data:text/calendar;charset=utf8," + encodeURIComponent(cal.toString()));
         // export the calendar
         // my spidey senses are telling me that there are sitaations where this isn't going to work, but none of my tests could prove it.
         // i suspect we're not encoding events properly
         // window.open("data:text/calendar;charset=utf8," + encodeURIComponent(cal.toString()));
         window.location.href = "data:text/calendar;charset=utf8," + encodeURIComponent(cal.toString());
+        e.stopPropagation();
+        // console.log("handle calendar event propagation");
     }
 }

@@ -7,6 +7,7 @@ import * as moment from "moment";
 import { BaseCalendarService } from "../BaseCalendarService";
 import { ICalendarEvent } from "../ICalendarEvent";
 import { ICalendarService } from "../ICalendarService";
+import { ChoiceGroup } from "office-ui-fabric-react";
 
 const sampleEvents: ICalendarEvent[] = [
   {
@@ -19,6 +20,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: "Barrie, ON",
     description: "This is a description",
     approvalStatus: "Approved",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -31,6 +33,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -43,6 +46,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -55,6 +59,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -67,6 +72,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -79,6 +85,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -91,6 +98,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -103,6 +111,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -115,6 +124,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -127,6 +137,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Pending",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -139,6 +150,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Approved",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -151,6 +163,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Approved",
+    eventCampus: undefined,
     id: undefined
   },
   {
@@ -163,6 +176,7 @@ const sampleEvents: ICalendarEvent[] = [
     location: undefined,
     description: undefined,
     approvalStatus: "Approved",
+    eventCampus: undefined,
     id: undefined
   }
 ];

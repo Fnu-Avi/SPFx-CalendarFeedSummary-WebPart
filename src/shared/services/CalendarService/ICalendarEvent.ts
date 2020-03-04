@@ -1,3 +1,5 @@
+import { ChoiceFieldFormatType } from "@pnp/sp";
+
 export interface ICalendarEvent {
     title: string;
     start: Date;
@@ -8,5 +10,6 @@ export interface ICalendarEvent {
     description: string|undefined;
     location: string|undefined;
     approvalStatus: string|undefined;
+    eventCampus: ChoiceFieldFormatType|undefined;
     id: number|undefined;
 }

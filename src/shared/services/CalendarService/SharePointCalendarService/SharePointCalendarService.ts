@@ -51,7 +51,7 @@ export class SharePointCalendarService extends BaseCalendarService
         .orderBy('EventDate', true)
         .filter(dateFilter)
         .get();
-      console.log(web.getList(listUrl).items.get())
+      console.log(web.getList(listUrl).items.get());
       // Once we get the list, convert to calendar events
       let events: ICalendarEvent[] = items.map((item: any) => {
         let eventUrl: string = combine(webUrl, "DispForm.aspx?ID=" + item.Id);
@@ -64,7 +64,8 @@ export class SharePointCalendarService extends BaseCalendarService
           category: item.Category,
           description: item.Description,
           location: item.Location,
-          approvalStatus: item.ows_ApprovalStatus,
+          approvalStatus: item.EventStatus,
+          eventCampus: item.EventCampus,
           id: item.Id
         };
         return eventItem;

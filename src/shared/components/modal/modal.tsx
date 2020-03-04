@@ -5,7 +5,7 @@ import { getId } from 'office-ui-fabric-react/lib/Utilities';
 import { hiddenContentStyle, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
 import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { ContextualMenu } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { sp, Item } from "@pnp/sp";
+import { sp, Item, Web } from "@pnp/sp";
 import { AttachmentFile, AttachmentFiles, AttachmentFileInfo } from '@pnp/sp/src/attachmentfiles'; 
 import { IEventCardProps } from '../EventCard';
 
@@ -38,12 +38,17 @@ export class DialogBasicExample extends React.Component<IEventCardProps , IDialo
         let attachmentfiles: string = "";  
         // console.log(this.props.event.id)
         // console.log(this.testVariables.identity);
-        sp.web.lists.getByTitle("Events").items  
+        // let urlList = "https://keckmedicine.sharepoint.com/sites/_api/web/lists/getByTitle('Events')/items?$expand=AttachmentFiles&$filter=Attachments%20eq%201"
+        const urlList = new Web("https://keckmedicine.sharepoint.com/sites/KSOM-Intranet/")
+        // console.log(urlList.lists.getByTitle("Events").items);
+        // sp.web.lists
+        urlList.lists.getByTitle("Events").items  
         .select("Id,Title,Attachments,AttachmentFiles")  
         .expand("AttachmentFiles")  
         .filter('Attachments eq 1')  
-        .get().then((response: Item[]) => {  
-        
+        .get()
+        .then((response: Item[]) => {  
+        // console.log(response);
         response.forEach((listItem: any) => {  
             if(listItem.Id == this.props.event.id){
                 listItem.AttachmentFiles.forEach((afile: any) => {  
@@ -52,7 +57,8 @@ export class DialogBasicExample extends React.Component<IEventCardProps , IDialo
                     let downloadUrl = "https://keckmedicine.sharepoint.com/sites/KSOM-Intranet/Lists/Events/Attachments/" + `${listItem.Id}/` + afile.FileName;
                     // console.log(downloadUrl)
                     // let downloadUrl = this.context.pageContext.web.absoluteUrl + "/_layouts/download.aspx?sourceurl=" + afile.ServerRelativeUrl;  
-                    attachmentfiles += `<li>(${listItem.Id}) ${listItem.Title} - <a href='${downloadUrl}'>${afile.FileName}</a></li>`;  
+                    // attachmentfiles += `<li>(${listItem.Id}) ${listItem.Title} - <a href='${downloadUrl}'>${afile.FileName}</a></li>`;  
+                    attachmentfiles += `<li><a href='${downloadUrl}'>${afile.FileName}</a></li>`;  
                 });
             }
               
@@ -73,11 +79,11 @@ export class DialogBasicExample extends React.Component<IEventCardProps , IDialo
     const { hideDialog, isDraggable } = this.state;
 
     return (
-      <span>
+      <span onClick = {this.handleChildClick}>
         {/* <Checkbox label="Is draggable" onChange={this._toggleDraggable} checked={isDraggable} /> */}
         <IconButton
             // className={styles.addToMyCalendar}
-            iconProps={{ iconName: "FileSymlink" }}
+            iconProps={{ iconName: "PhotoVideoMedia" }}
             onClick={this._showDialog}
             // ariaLabel={strings.AddToCalendarAriaLabel}
             // onClick={this._onAddToMyCalendar}
@@ -120,15 +126,20 @@ export class DialogBasicExample extends React.Component<IEventCardProps , IDialo
     );
   }
 
+  private handleChildClick = (e): void => {
+    e.stopPropagation();
+    // console.log("handleChildClick");
+  }
+
   private _showDialog = (): void => {
     this.setState({ hideDialog: false });
-  };
+  }
 
   private _closeDialog = (): void => {
     this.setState({ hideDialog: true });
-  };
+  }
 
   private _toggleDraggable = (): void => {
     this.setState({ isDraggable: !this.state.isDraggable });
-  };
+  }
 }
