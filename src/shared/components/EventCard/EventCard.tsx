@@ -46,6 +46,10 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
         const dateString: string = allDay ? eventDate.format(strings.AllDayDateFormat) : eventDate.format(strings.LocalizedTimeFormat);
         const { isEditMode } = this.props;
         // console.log(approvalStatus);
+        console.log(url);
+
+        const displayFormURL = "https://keckmedicine.sharepoint.com/sites/KSOM-Intranet/SitePages/Display-Form.aspx";
+
         if(approvalStatus == "Approved"){
             return (
                 <div>
@@ -60,7 +64,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
                         <DocumentCard
                             className={css(styles.root, !isEditMode && styles.rootIsActionable, styles.normalCard)}
                             type={DocumentCardType.normal}
-                            onClickHref={isEditMode ? null : url}
+                            onClickHref={isEditMode ? null : displayFormURL + "?event=" + id}
                         >
                             <FocusZone>
                                 <div className={styles.dateBoxContainer} style={{ height: 160 }} data-automation-id="normal-card-preview">
@@ -115,6 +119,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
             // category,
             // location
           } = this.props.event;
+        console.log(url);
         const eventDate: moment.Moment = moment.utc(start);
         const dateString: string = allDay ? eventDate.format(strings.AllDayDateFormat) : eventDate.format(strings.LocalizedTimeFormat);
         return (
@@ -129,7 +134,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
                     <DocumentCard
                         className={css(styles.root, styles.rootIsActionable, styles.rootIsCompact)}
                         type={DocumentCardType.compact}
-                        onClickHref={"#"}
+                        onClickHref={url}
                     >
                         <div data-automation-id="normal-card-preview">
                             <DateBox

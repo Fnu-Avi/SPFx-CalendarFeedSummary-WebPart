@@ -62,7 +62,6 @@ export class DialogBasicExample extends React.Component<IEventCardProps , IDialo
                 });
             }
               
-    
         });      
         attachmentfiles = `<ul>${attachmentfiles}</ul>`;
         // console.log(attachmentfiles); 
