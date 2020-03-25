@@ -1,5 +1,5 @@
 import { MockCalendarService } from "./MockCalendarService";
-import { RSSCalendarService } from "./RSSCalendarService";
+// import { RSSCalendarService } from "./RSSCalendarService";
 import { WordPressFullCalendarService } from "./WordPressFullCalendarService";
 import { iCalCalendarService } from "./iCalCalendarService";
 import { ExchangePublicCalendarService } from "./ExchangePublicCalendarService";
@@ -13,7 +13,7 @@ export enum CalendarServiceProviderType {
   WordPress = "WordPress",
   Exchange = "Exchange",
   iCal = "iCal",
-  RSS = "RSS",
+  // RSS = "RSS",
   Mock = "Mock"
 }
 
@@ -39,12 +39,13 @@ export class CalendarServiceProviderList {
         label: strings.iCalProviderName,
         key: CalendarServiceProviderType.iCal,
         initialize: () => new iCalCalendarService()
-      },
-      {
-        label: strings.RSSProviderName,
-        key: CalendarServiceProviderType.RSS,
-        initialize: () => new RSSCalendarService()
       }
+      // ,
+      // {
+      //   label: strings.RSSProviderName,
+      //   key: CalendarServiceProviderType.RSS,
+      //   initialize: () => new RSSCalendarService()
+      // }
     ];
 
     // only include the Mock service provider in DEBUG

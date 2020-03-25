@@ -43,11 +43,12 @@ export class SharePointCalendarService extends BaseCalendarService
     // Get the web
     await web.get();
     // Build a filter so that we don't retrieve every single thing unless necesssary
-    let dateFilter: string = "EventDate ge datetime'" + this.EventRange.Start.toISOString() + "' and EndDate lt datetime'" + this.EventRange.End.toISOString() + "'";
+    let dateFilter: string = "EventDate ge datetime'" + this.EventRange.Start.toISOString() + "' and EndDate lt datetime'" + this.EventRange.End.toISOString() + "' and EventStatus eq 'Approved'";;
+    let appStatus: string = "Approved"
     try {
       const items = await web.getList(listUrl)
         .items
-        // .select("Id,Title,Description,EventDate,EndDate,fAllDayEvent,Category,Location")
+        .select("Id,Title,Description,EventDate,EndDate,fAllDayEvent,Category,Location, EventStatus")
         .orderBy('EventDate', true)
         .filter(dateFilter)
         .get();

@@ -9,7 +9,7 @@ import { DateBox, DateBoxSize } from "../DateBox";
 import styles from "./EventCard.module.scss";
 import { Text } from "@microsoft/sp-core-library";
 import { DialogBasicExample } from "../modal/modal";
-import { sp } from "@pnp/sp";
+
 /**
  * Shows an event in a document card
  */
@@ -22,10 +22,13 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
 
     public render(): React.ReactElement<IEventCardProps> {
         const { isNarrow } = this.props;
-
+        // console.log(this.props.event);
+        // console.log(isNarrow);
         if (isNarrow) {
+            // console.log("narrowCell");
             return this._renderNarrowCell();
         } else {
+            // console.log("normalCell");
             return this._renderNormalCell();
         }
     }
@@ -40,74 +43,59 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
             approvalStatus,
             eventCampus,
             id,
-            // description,
             location } = this.props.event;
         const eventDate: moment.Moment = moment(start);
         const dateString: string = allDay ? eventDate.format(strings.AllDayDateFormat) : eventDate.format(strings.LocalizedTimeFormat);
         const { isEditMode } = this.props;
         // console.log(approvalStatus);
-        console.log(url);
+        // console.log(url);
 
         const displayFormURL = "https://keckmedicine.sharepoint.com/sites/KSOM-Intranet/SitePages/Display-Form.aspx";
 
-        if(approvalStatus == "Approved"){
-            return (
-                <div>
-                    <div
-                        className={css(styles.cardWrapper)}
-                        data-is-focusable={true}
-                        data-is-focus-item={true}
-                        role="listitem"
-                        aria-label={Text.format(strings.EventCardWrapperArialLabel, title, `${dateString}`)}
-                        tabIndex={0}
-                    >
-                        <DocumentCard
-                            className={css(styles.root, !isEditMode && styles.rootIsActionable, styles.normalCard)}
-                            type={DocumentCardType.normal}
-                            onClickHref={isEditMode ? null : displayFormURL + "?event=" + id}
-                        >
-                            <FocusZone>
-                                <div className={styles.dateBoxContainer} style={{ height: 160 }} data-automation-id="normal-card-preview">
-                                    <span className={styles.location}>{eventCampus}</span>
-                                    <DateBox
-                                        className={styles.dateBox}
-                                        startDate={start}
-                                        endDate={end}
-                                        size={DateBoxSize.Medium}
-                                    />
-                                    <DialogBasicExample {...this.props}> </DialogBasicExample>
-                                </div>
-                                <div className={styles.detailsContainer}>
-                                    <div className={styles.category}>{category}</div>
-                                    <div className={styles.title} data-automation-id="event-card-title">{title}</div>
-                                    <div className={styles.datetime}>{dateString}</div>
-                                    <div className={styles.location}>{location}</div>
-                                    {/* <div className={styles.location}>{approvalStatus}</div> */}
-                                    {/* <div className={styles.category} id="myBtn">HJ</div> */}
-                                    
-                                    <ActionButton
-                                        className={styles.addToMyCalendar}
-                                        iconProps={{ iconName: "AddEvent" }}
-                                        ariaLabel={strings.AddToCalendarAriaLabel}
-                                        onClick={this._onAddToMyCalendar}
-                                    >
-                                        {strings.AddToCalendarButtonLabel}
-                                    </ActionButton>
-                                </div>
-                                </FocusZone>
-                        </DocumentCard>
-                    </div>
-                </div>
-            );
-        }
-        else{
-            return (
-                <div>
-
-                </div>
-            );
-        }
-        
+        return (
+            <div
+                className={css(styles.cardWrapper)}
+                data-is-focusable={true}
+                data-is-focus-item={true}
+                role="listitem"
+                aria-label={Text.format(strings.EventCardWrapperArialLabel, title, `${dateString}`)}
+                tabIndex={0}
+            >
+                <DocumentCard
+                    className={css(styles.root, !isEditMode && styles.rootIsActionable, styles.normalCard)}
+                    type={DocumentCardType.normal}
+                    onClickHref={isEditMode ? null : displayFormURL + "?event=" + id}
+                >
+                    <FocusZone>
+                        <div className={styles.dateBoxContainer} style={{ height: 160 }} data-automation-id="normal-card-preview">
+                            <span className={styles.location}>{eventCampus}</span>
+                            <DateBox
+                                className={styles.dateBox}
+                                startDate={start}
+                                endDate={end}
+                                size={DateBoxSize.Medium}
+                            />
+                            <DialogBasicExample {...this.props}> </DialogBasicExample>
+                        </div>
+                        <div className={styles.detailsContainer}>
+                            <div className={styles.category}>{category}</div>
+                            <div className={styles.title} data-automation-id="event-card-title">{title}</div>
+                            <div className={styles.datetime}>{dateString}</div>
+                            <div className={styles.location}>{location}</div>
+                            
+                            <ActionButton
+                                className={styles.addToMyCalendar}
+                                iconProps={{ iconName: "AddEvent" }}
+                                ariaLabel={strings.AddToCalendarAriaLabel}
+                                onClick={this._onAddToMyCalendar}
+                            >
+                                {strings.AddToCalendarButtonLabel}
+                            </ActionButton>
+                        </div>
+                        </FocusZone>
+                </DocumentCard>
+            </div>
+        );
     }
 
     private _renderNarrowCell(): JSX.Element {

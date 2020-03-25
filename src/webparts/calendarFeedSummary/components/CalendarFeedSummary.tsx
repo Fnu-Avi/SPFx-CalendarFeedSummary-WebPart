@@ -216,24 +216,24 @@ export default class CalendarFeedSummary extends React.Component<ICalendarFeedSu
         break;
       default:
         // specific provider messages
-        if (provider.Name === CalendarServiceProviderType.RSS) {
-          switch (error) {
-            case "No result":
-              errorMsg = strings.ErrorRssNoResult;
-              break;
-            case "No root":
-              errorMsg = strings.ErrorRssNoRoot;
-              break;
-            case "No channel":
-              errorMsg = strings.ErrorRssNoChannel;
-              break;
-          }
-        } else if (provider.Name === CalendarServiceProviderType.iCal &&
-          error.indexOf("Unable to get property 'property' of undefined or null reference") !== -1) {
-          errorMsg = strings.ErrorInvalidiCalFeed;
-        } else if (provider.Name === CalendarServiceProviderType.WordPress && error.indexOf("Failed to read") !== -1) {
-          errorMsg = strings.ErrorInvalidWordPressFeed;
-        }
+        // if (provider.Name === CalendarServiceProviderType.RSS) {
+        //   switch (error) {
+        //     case "No result":
+        //       errorMsg = strings.ErrorRssNoResult;
+        //       break;
+        //     case "No root":
+        //       errorMsg = strings.ErrorRssNoRoot;
+        //       break;
+        //     case "No channel":
+        //       errorMsg = strings.ErrorRssNoChannel;
+        //       break;
+        //   }
+        // } else if (provider.Name === CalendarServiceProviderType.iCal &&
+        //   error.indexOf("Unable to get property 'property' of undefined or null reference") !== -1) {
+        //   errorMsg = strings.ErrorInvalidiCalFeed;
+        // } else if (provider.Name === CalendarServiceProviderType.WordPress && error.indexOf("Failed to read") !== -1) {
+        //   errorMsg = strings.ErrorInvalidWordPressFeed;
+        // }
     }
 
     return (<div className={styles.errorMessage} >
@@ -269,6 +269,7 @@ export default class CalendarFeedSummary extends React.Component<ICalendarFeedSu
       usePaging = true;
     }
 
+    // console.log("narrow list");
     return (<FocusZone
       direction={FocusZoneDirection.vertical}
       isCircularNavigation={false}
@@ -307,19 +308,28 @@ export default class CalendarFeedSummary extends React.Component<ICalendarFeedSu
     const {
       events } = this.state;
     const isEditMode: boolean = this.props.displayMode === DisplayMode.Edit;
-
+    // console.log(this.state.events);
     return (<div>
       <div>
         <div role="application">
+          {/* <If condition={this.props.}></If> */}
           <FilmstripLayout
             ariaLabel={strings.FilmStripAriaLabel}
           >
+
             {events.map((event: ICalendarEvent, index: number) => {
-              return (<EventCard
-                key={`eventCard${index}`}
-                isEditMode={isEditMode}
-                event={event}
-                isNarrow={false} />);
+              // if(events[index].approvalStatus === "Approved"){
+                // console.log(event);
+                // console.log(index);
+                return (<EventCard
+                  key={`eventCard${index}`}
+                  isEditMode={isEditMode}
+                  event={event}
+                  isNarrow={false} />);
+              // }
+              // else{
+              //   return null;
+              // }
             })}
           </FilmstripLayout>
         </div>

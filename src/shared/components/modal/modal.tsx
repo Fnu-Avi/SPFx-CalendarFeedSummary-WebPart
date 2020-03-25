@@ -3,10 +3,10 @@ import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dia
 import { PrimaryButton, DefaultButton, ActionButton, IconButton } from 'office-ui-fabric-react/lib/Button';
 import { getId } from 'office-ui-fabric-react/lib/Utilities';
 import { hiddenContentStyle, mergeStyles } from 'office-ui-fabric-react/lib/Styling';
-import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
+// import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { ContextualMenu } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { sp, Item, Web } from "@pnp/sp";
-import { AttachmentFile, AttachmentFiles, AttachmentFileInfo } from '@pnp/sp/src/attachmentfiles'; 
+// import { AttachmentFile, AttachmentFiles, AttachmentFileInfo } from '@pnp/sp/src/attachmentfiles'; 
 import { IEventCardProps } from '../EventCard';
 
 
@@ -39,7 +39,7 @@ export class DialogBasicExample extends React.Component<IEventCardProps , IDialo
         // console.log(this.props.event.id)
         // console.log(this.testVariables.identity);
         // let urlList = "https://keckmedicine.sharepoint.com/sites/_api/web/lists/getByTitle('Events')/items?$expand=AttachmentFiles&$filter=Attachments%20eq%201"
-        const urlList = new Web("https://keckmedicine.sharepoint.com/sites/KSOM-Intranet/")
+        const urlList = new Web("https://keckmedicine.sharepoint.com/sites/KSOM-Intranet/");
         // console.log(urlList.lists.getByTitle("Events").items);
         // sp.web.lists
         urlList.lists.getByTitle("Events").items  
