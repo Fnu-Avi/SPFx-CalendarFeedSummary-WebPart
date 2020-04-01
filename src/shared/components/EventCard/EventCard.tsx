@@ -144,7 +144,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
 
     private _onAddToMyCalendar = (e): void => {
         const { event } = this.props;
-
+        console.log(event);
         // create a calendar to hold the event
         const cal: ICS.VCALENDAR = new ICS.VCALENDAR();
         cal.addProp("VERSION", 2.0);
@@ -162,7 +162,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
             icsEvent.addProp("DTSTART", event.start, { VALUE: "DATE" });
         } else {
             icsEvent.addProp("DTSTAMP", event.start, { VALUE: "DATE-TIME" });
-            icsEvent.addProp("DTSTART", event.start, { VALUE: "DATE-TIME" });
+            icsEvent.addProp("DTSTART", event.end, { VALUE: "DATE-TIME" });
             icsEvent.addProp("DTEND", event.start, { VALUE: "DATE-TIME" });
         }
 
@@ -176,6 +176,7 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
 
         // add a description if there is one
         if (event.description !== undefined) {
+            console.log(event.description);
             icsEvent.addProp("DESCRIPTION", event.description);
         }
 

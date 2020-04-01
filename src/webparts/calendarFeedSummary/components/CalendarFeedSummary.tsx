@@ -128,12 +128,12 @@ export default class CalendarFeedSummary extends React.Component<ICalendarFeedSu
             >
                 Add Event
           </ActionButton>
-          <ActionButton
+          {/* <ActionButton
                 className={ styles.seeAllEventsStyle }
                 onClick={this.redirectSeeAllLink}
             >
                 See All
-          </ActionButton>
+          </ActionButton> */}
         </div>
         <div className={styles.content}>
           {this._renderContent()}
