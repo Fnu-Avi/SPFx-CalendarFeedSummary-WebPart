@@ -51,8 +51,11 @@ export class SharePointCalendarService extends BaseCalendarService
         .orderBy('EventDate', true)
         .filter(dateFilter)
         .get();
-      console.log(web.getList(listUrl).items.get());
+      // console.log(web.getList(listUrl).items.get());
+      // console.log(items);
       // Once we get the list, convert to calendar events
+      // let el = document.createElement( 'html' );
+      // var parser = new DOMParser();
       let events: ICalendarEvent[] = items.map((item: any) => {
         let eventUrl: string = combine(webUrl, "DispForm.aspx?ID=" + item.Id);
         const eventItem: ICalendarEvent = {
@@ -62,14 +65,23 @@ export class SharePointCalendarService extends BaseCalendarService
           url: eventUrl,
           allDay: item.fAllDayEvent,
           category: item.Category,
-          description: item.Description,
+          // description: item.Description,
+          description: "<body id='pi'>"+item.Description+"</body>",
           location: item.Location,
           approvalStatus: item.EventStatus,
           eventCampus: item.EventCampus,
           id: item.Id
         };
+        
+        
+        // var htmlDoc = parser.parseFromString(eventItem.description, 'text/xml');
+        // console.log(htmlDoc);
+        // console.log(document.createElement( 'html' ).innerHTML = "<html>"+eventItem.description+"</html>");
+        // console.log(el);
+        // console.log(eventItem.description);
         return eventItem;
       });
+      // console.log(events);
       // Return the calendar items
       return events;
     }

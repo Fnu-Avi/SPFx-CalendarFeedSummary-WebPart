@@ -144,7 +144,8 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
 
     private _onAddToMyCalendar = (e): void => {
         const { event } = this.props;
-        console.log(event);
+        // console.log(event);
+        
         // create a calendar to hold the event
         const cal: ICS.VCALENDAR = new ICS.VCALENDAR();
         cal.addProp("VERSION", 2.0);
@@ -176,8 +177,15 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
 
         // add a description if there is one
         if (event.description !== undefined) {
-            console.log(event.description);
-            icsEvent.addProp("DESCRIPTION", event.description);
+            var parser = new DOMParser();
+            var htmlDoc = parser.parseFromString(event.description, 'text/html');
+            // console.log(htmlDoc);
+            var inputElement = htmlDoc.getElementById('pi').textContent;
+            // var test = htmlDoc.getElementById('pi');
+            // console.log(inputElement);
+            // console.log(event.description);
+            // icsEvent.addProp("DESCRIPTION", event.description);
+            icsEvent.addProp("DESCRIPTION", inputElement);
         }
 
         // add a location if there is one
