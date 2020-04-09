@@ -163,8 +163,8 @@ export class EventCard extends React.Component<IEventCardProps, IEventCardState>
             icsEvent.addProp("DTSTART", event.start, { VALUE: "DATE" });
         } else {
             icsEvent.addProp("DTSTAMP", event.start, { VALUE: "DATE-TIME" });
-            icsEvent.addProp("DTSTART", event.end, { VALUE: "DATE-TIME" });
-            icsEvent.addProp("DTEND", event.start, { VALUE: "DATE-TIME" });
+            icsEvent.addProp("DTSTART", event.start, { VALUE: "DATE-TIME" });
+            icsEvent.addProp("DTEND", event.end, { VALUE: "DATE-TIME" });
         }
 
         // add a title
