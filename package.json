@@ -39,7 +39,7 @@
     "react-modal": "^3.11.1",
     "react-router-dom": "^5.1.2",
     "react-slick": "^0.23.2",
-    "rss-parser": "^3.6.2",
+    "rss-parser": "^3.13.0",
     "slick-carousel": "^1.8.1"
   },
   "resolutions": {
@@ -47,10 +47,10 @@
   },
   "devDependencies": {
     "@microsoft/rush-stack-compiler-2.9": "0.7.16",
-    "@microsoft/sp-build-web": "1.9.1",
+    "@microsoft/sp-build-web": "1.17.1",
     "@microsoft/sp-module-interfaces": "1.9.1",
     "@microsoft/sp-tslint-rules": "1.9.1",
-    "@microsoft/sp-webpart-workbench": "1.9.1",
+    "@microsoft/sp-webpart-workbench": "1.12.1",
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.38",
     "ajv": "~5.2.2",
